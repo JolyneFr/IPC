@@ -347,14 +347,18 @@ function getCursorPos( event ) {
         mazes[0][end[0].x][end[0].y] = 8;
         mazes[1][end[1].x][end[1].y] = 8;
 
+        document.getElementById("canvas1").removeEventListener("mousedown", getCursorPos);
+
         if(document.getElementById("sltType").value == "Maze1") {
             solveMaze1(0);
             solveMaze1_AStar(1);    
         } else {
-
             solveMaze2(0);
             solveMaze2Optimized(1);
         }
+
+        document.getElementById("canvas1").addEventListener("mousedown", getCursorPos, false);
+
     }
 }
 
