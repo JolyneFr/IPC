@@ -43,7 +43,6 @@ function getNextStepForMaze1( index, sx, sy, a ) {
         if(sx + step.dx > 0 && sx + step.dx < cols - 1 && sy + step.dy > 0 && sy + step.dy < rows - 1 &&
             mazes[index][sx + step.dx][sy + step.dy] % 8 == a){
             n.push({x: sx + step.dx, y: sy + step.dy});
-
             break;
         }
     }

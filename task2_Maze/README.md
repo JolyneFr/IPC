@@ -16,4 +16,4 @@ https://github.com/zilinglius/maze.git
 ## **Optimization**
 
 + UI: nothing yet
-+ Algorithm: nothing yet
++ Algorithm: add A* Algorithm for Maze1
