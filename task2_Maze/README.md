@@ -17,6 +17,7 @@ https://github.com/zilinglius/maze.git
 
 + LogicOpt: 
     + banned mousedown while drawing on the canvas
+    + add function of selecting algorithm
 + Algorithm: 
     + add A* Algorithm for Maze1 (Quad)
     + add A* Algorithm for Maze2 (Oct)

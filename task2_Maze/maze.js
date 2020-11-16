@@ -417,10 +417,18 @@ function getCursorPos( event ) {
 
         if(document.getElementById("sltType").value == "Maze1") {
             solveMaze1(0);
-            solveMaze1_AStar(1);    
+            if(document.getElementById("algType").value == "A* Algorithm") {
+                solveMaze1_AStar(1);    
+            } else {
+                solveMaze1Optimized(1);
+            }
         } else {
             solveMaze2(0);
-            solveMaze2_AStar(1);
+            if(document.getElementById("algType").value == "A* Algorithm") {
+                solveMaze2_AStar(1);    
+            } else {
+                solveMaze2Optimized(1);
+            }
         }
 
         document.getElementById("canvas1").addEventListener("mousedown", getCursorPos, false);
