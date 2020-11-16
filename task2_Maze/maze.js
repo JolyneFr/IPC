@@ -110,6 +110,20 @@ function getNextStepForMaze2( index, sx, sy, a ) {
     return n;
 }
 
+function getNextStepForMaze2AStar( index, sx, sy, a ) {
+    var n = [];
+
+    for (let i = 0; i < octSteps.length; i++) {
+        const step = octSteps[i];
+        
+        if(sx + step.dx > 0 && sx + step.dx < cols - 1 && sy + step.dy > 0 && sy + step.dy < rows - 1 &&
+            mazes[index][sx + step.dx][sy + step.dy] % 8 == a){
+            n.push({x: sx + step.dx, y: sy + step.dy});
+        }
+    }
+    return n;
+}
+
 function getOptimizedNextStepForMaze2(index, sx, sy, a) {
 
     var n = [];
@@ -266,11 +280,11 @@ function solveMaze1_AStar(index) {
     drawMaze(index);
 
     
-    recur_AStar(index, openList, closeList);
+    recur_AStar_Maze1(index, openList, closeList);
     
 }
 
-function recur_AStar(index, openList, closeList) {
+function recur_AStar_Maze1(index, openList, closeList) {
     openList.sort(sortF);
     var currentPoint = openList.pop();
     if( currentPoint.x == end[index].x && currentPoint.y == end[index].y ) {
@@ -305,12 +319,64 @@ function recur_AStar(index, openList, closeList) {
     }
     drawMaze(index);
     requestAnimationFrame( function() {
-        recur_AStar(index, openList, closeList);
+        recur_AStar_Maze1(index, openList, closeList);
     } );
 }
 
+function solveMaze2_AStar(index) {
+    var openList = [],
+        closeList = [];
+    
+    openList.push({x:start[index].x, y:start[index].y, G:0});
+    drawMaze(index);
+
+    
+    recur_AStar_Maze2(index, openList, closeList);
+    
+}
+
+function recur_AStar_Maze2(index, openList, closeList) {
+    openList.sort(sortF);
+    var currentPoint = openList.pop();
+    if( currentPoint.x == end[index].x && currentPoint.y == end[index].y ) {
+        var callBackPoint = currentPoint;
+        while (callBackPoint.x != start[index].x || callBackPoint.y != start[index].y) {
+            mazes[index][callBackPoint.x][callBackPoint.y] = 3;
+            callBackPoint = callBackPoint.parent;
+        }
+        mazes[index][start[index].x][start[index].y] = 3;
+        drawMaze(index);
+        return;
+    }
+    closeList.push(currentPoint); //closeList = red block?
+    mazes[index][currentPoint.x][currentPoint.y] = 4;
+    var neighbours = getNextStepForMaze2AStar(index, currentPoint.x, currentPoint.y, 0); //leagl & not in closeList
+    for (var i in neighbours) { 
+        var curNeighbour = neighbours[i];
+        var openCheck = existList(curNeighbour, openList);
+        if (!openCheck) {
+            curNeighbour['H'] = Math.abs(curNeighbour.x - end[index].x) + Math.abs(curNeighbour.y - end[index].y);
+            curNeighbour['G'] = currentPoint.G + 1;
+            curNeighbour['F'] = curNeighbour.H + curNeighbour.G;
+            curNeighbour['parent'] = currentPoint;
+            openList.push(curNeighbour);
+        } else {
+            if (currentPoint.G + 1 < openList[openCheck].G) {
+                openList[openCheck].parent = currentPoint;
+                openList[openCheck].G = currentPoint.G + 1;
+                openList[openCheck].F = openList[openCheck].G + openList[openCheck].H;
+            }
+        }
+    }
+    drawMaze(index);
+    requestAnimationFrame( function() {
+        recur_AStar_Maze2(index, openList, closeList);
+    } );
+}
+
+
 function sortF(a,b){
-    return b.F- a.F;
+    return b.F - a.F;
 }
 
 function existList(point,list) {
@@ -354,7 +420,7 @@ function getCursorPos( event ) {
             solveMaze1_AStar(1);    
         } else {
             solveMaze2(0);
-            solveMaze2Optimized(1);
+            solveMaze2_AStar(1);
         }
 
         document.getElementById("canvas1").addEventListener("mousedown", getCursorPos, false);

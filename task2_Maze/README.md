@@ -15,5 +15,8 @@ https://github.com/zilinglius/maze.git
 
 ## **Optimization**
 
-+ LogicOpt: banned mousedown while drawing on the canvas
-+ Algorithm: add A* Algorithm for Maze1
++ LogicOpt: 
+    + banned mousedown while drawing on the canvas
++ Algorithm: 
+    + add A* Algorithm for Maze1 (Quad)
+    + add A* Algorithm for Maze2 (Oct)
