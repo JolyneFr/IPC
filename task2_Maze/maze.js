@@ -170,6 +170,7 @@ function solveMaze1(index) {
         return;
     }
 
+    if(start[index].x == -1 || start[index].y == -1) return;
     var neighbours = getNextStepForMaze1( 0, start[index].x, start[index].y, 0 );
     if( neighbours.length ) {
         stacks[index].push( start[index] );
@@ -200,6 +201,7 @@ function solveMaze1Optimized(index) {
         return;
     }
 
+    if(start[index].x == -1 || start[index].y == -1) return;
     var neighbours = getOptimizedNextStepForMaze1( 1, start[index].x, start[index].y, 0 );
     if( neighbours.length ) {
         stacks[index].push( start[index] );
@@ -229,6 +231,7 @@ function solveMaze2(index) {
         document.getElementById("canvas1").addEventListener("mousedown", getCursorPos, false);
         return;
     }
+    if(start[index].x == -1 || start[index].y == -1) return;
     var neighbours = getNextStepForMaze2( 0, start[index].x, start[index].y, 0 );
     if( neighbours.length ) {
         stacks[index].push( start[index] );
@@ -258,6 +261,7 @@ function solveMaze2Optimized(index) {
         drawMaze(index);
         retu2n;
     }
+    if(start[index].x == -1 || start[index].y == -1) return;
     var neighbours = getOptimizedNextStepForMaze2( 1, start[index].x, start[index].y, 0 );
     if( neighbours.length ) {
         stacks[index].push( start[index] );
@@ -278,6 +282,7 @@ function solveMaze1_AStar(index) {
     var openList = [],
         closeList = [];
     
+    if(start[index].x == -1 || start[index].y == -1) return;
     openList.push({x:start[index].x, y:start[index].y, G:0});
     drawMaze(index);
 
@@ -289,6 +294,7 @@ function solveMaze1_AStar(index) {
 function recur_AStar_Maze1(index, openList, closeList) {
     openList.sort(sortF);
     var currentPoint = openList.pop();
+    if(start[index].x == -1 || start[index].y == -1) return;
     if( currentPoint.x == end[index].x && currentPoint.y == end[index].y ) {
         var callBackPoint = currentPoint;
         while (callBackPoint.x != start[index].x || callBackPoint.y != start[index].y) {
@@ -328,7 +334,9 @@ function recur_AStar_Maze1(index, openList, closeList) {
 function solveMaze2_AStar(index) {
     var openList = [],
         closeList = [];
-    
+
+
+    if(start[index].x == -1 || start[index].y == -1) return;
     openList.push({x:start[index].x, y:start[index].y, G:0});
     drawMaze(index);
 
@@ -340,6 +348,7 @@ function solveMaze2_AStar(index) {
 function recur_AStar_Maze2(index, openList, closeList) {
     openList.sort(sortF);
     var currentPoint = openList.pop();
+    if(start[index].x == -1 || start[index].y == -1) return;
     if( currentPoint.x == end[index].x && currentPoint.y == end[index].y ) {
         var callBackPoint = currentPoint;
         while (callBackPoint.x != start[index].x || callBackPoint.y != start[index].y) {
@@ -748,6 +757,6 @@ function onClear() {
     start[1].x = start[1].y = -1;
 
     end[0].x = end[0].y = -1;
-    end[0].x = end[0].y = -1;
+    end[1].x = end[1].y = -1;
 
 }
