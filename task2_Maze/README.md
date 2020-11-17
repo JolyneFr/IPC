@@ -18,7 +18,7 @@ https://github.com/zilinglius/maze.git
 + LogicOpt: 
     + banned mousedown while drawing on the canvas
     + add function of selecting algorithm
-    + optimize some details
+    + optimize some details (debug)
     + add shortcut icon & title
 + UI:
   + re-organize UI
