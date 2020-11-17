@@ -166,6 +166,7 @@ function solveMaze1(index) {
             }
         }
         drawMaze(index);
+        document.getElementById("canvas1").addEventListener("mousedown", getCursorPos, false);
         return;
     }
 
@@ -225,6 +226,7 @@ function solveMaze2(index) {
             }
         }
         drawMaze(index);
+        document.getElementById("canvas1").addEventListener("mousedown", getCursorPos, false);
         return;
     }
     var neighbours = getNextStepForMaze2( 0, start[index].x, start[index].y, 0 );
@@ -430,8 +432,6 @@ function getCursorPos( event ) {
                 solveMaze2Optimized(1);
             }
         }
-
-        document.getElementById("canvas1").addEventListener("mousedown", getCursorPos, false);
 
     }
 }
