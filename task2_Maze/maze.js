@@ -1,15 +1,15 @@
 var ctxs, wid, hei, cols, rows, mazes, stacks = [];
 var quadSteps=[{dx: 0, dy: -1}, {dx: 1, dy: 0}, {dx: 0, dy: 1}, {dx: -1, dy: 0}];
 var octSteps=[{dx: -1, dy: -1}, {dx: 0, dy: -1}, {dx: 1, dy: -1}, {dx: 1, dy: 0}, {dx: 1, dy: 1}, {dx: 0, dy: 1}, {dx: -1, dy: 1}, {dx: -1, dy: 0}];
-var start = [{x:-1, y:-1}, {x:-1, y:-1}], end = [{x:-1, y:-1}, {x:-1, y:-1}],grid = 8;
+var start = [{x:-1, y:-1}, {x:-1, y:-1}], end = [{x:-1, y:-1}, {x:-1, y:-1}],grid = 4;
 var padding = 16, s, density=0.5, count=2;
 
 function drawMaze(index) {
     for( var i = 0; i < cols; i++ ) {
         for( var j = 0; j < rows; j++ ) {
             switch( mazes[index][i][j] ) {
-                case 0: ctxs[index].fillStyle = "black"; break;
-                case 1: ctxs[index].fillStyle = "gray"; break;
+                case 0: ctxs[index].fillStyle = "gray"; break;
+                case 1: ctxs[index].fillStyle = "black"; break;
                 case 2: ctxs[index].fillStyle = "red"; break;
                 case 3: ctxs[index].fillStyle = "yellow"; break;
                 case 4: ctxs[index].fillStyle = "#500000"; break;
@@ -622,7 +622,7 @@ function createCanvas(count) {
         wid = document.getElementById("maze" + (i + 1)).offsetWidth - padding; 
         hei = 400;
         
-        canvas.width = wid; canvas.height = 400;
+        canvas.width = wid; canvas.height = 350;
         canvas.id = "canvas" + (i + 1);
         ctxs[i] = canvas.getContext( "2d" );
         ctxs[i].fillStyle = "grey"; 

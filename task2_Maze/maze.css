@@ -1,2 +1,12 @@
 .sidebar{font-size: .7rem;}
 .col-text-center{text-align: center;}
+
+.header2 {
+    background-image: url(https://www.sjtu.edu.cn/resource/assets/img/sjtudoorBG.jpg);
+    background-position-x: center;
+    background-position-y: -60px;
+    height: 450px;
+    background-repeat: no-repeat;
+    background-color: #b2141a;
+    background-size: 90%;
+}

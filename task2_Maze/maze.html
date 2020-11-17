@@ -5,68 +5,89 @@
         <title>Maze</title>
         <script src="maze.js"></script>
         <script src="maze.png"></script>
-        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
-        <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+        <script src="introduction.html"></script>
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+        <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
         <link rel="stylesheet" href="maze.css">
         <link href="maze.png" rel="SHORTCUT ICON">
     </head>
-    <body onload="init()">
-        <h1 style="text-align:center">MAZE!</h1>
+    <body onload="init()" class="modern-ui" onload="prettyPrint()">
+        <div class="jumbotron text-center" style="margin-bottom:1">
+            <h1>MAZE!</h1>
+            <button type="button" class="btn btn-primary">
+                <a href="https://github.com/JolyneFr" id="test">
+                <span class="glyphicon glyphicon-user"></span> My Github! </a>
+            </button>
+        </div>
         <div class="container">
-            <div id="main" class="columns">
-                <div id="menu" class="column col-2">
-                    <ul class="nav sidebar">
+            <div class="row">
+                <div class="col-sm-3">
+                    <ul class="nav nav-pills nav-stacked">
                         <li class="nav-item">
-                            <a href="#">Getting Started</a>
-                            <ul class="nav">
+                            <h4>Getting Started:</h4>
+                            <hr/>
+                            <ul class="nav-pills nav-stacked">
                             <li class="nav-item">
-                                <a href="#">Introduction</a>
+                                <a href="introduction.html">Introduction</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#">Setings</a>
+                                <p>Setings</p>
+                                <div class="input-group-sm">
+                                    <span class="input-group-addon">Columns</span>
+                                    <input id="cols" class="form-control" type="number" placeholder="65" value="65">
+                                </div>
+                                <hr/>
+                                <div class="input-group-sm">
+                                    <span class="input-group-addon">Rows</span>
+                                    <input id="rows" class="form-control" type="number" placeholder="60" value="60">
+                                </div>
+                                <hr/>
+                                <div class="input-group-sm">
+                                    <span class="input-group-addon">Density</span>
+                                    <input id="density" class="form-control" type="number" placeholder="60" value="60" disabled>
+                                </div> 
+                                <br/>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input id="chkAnimated" type="checkbox" class="form-check-input" name="maze" checked><i class="form-icon"></i>Animated
+                                    </label>
+                                </div>  
                             </li>
+                            <button id="btnCreateMaze" class="btn btn-success" onclick="onCreate()">Create</button>
+                            <button id="btnClear" class="btn btn-warning" onclick="onClear()">Clear</button>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="#">Maze</a>
-                        </li>
-                    </ul>                
+                    </ul>
+                    <hr/>
                 </div>
-                <div id="main" class="column col-10">
-                    <div class="columns">
-                        <div id="content" class="column col-11 col-mx-auto col-text-center">
-                            <div class="columns">
-                                <div class="column col-12">
-                                    <div class="input-group">
-                                        <span class="input-group-addon addon-sm">Type:</span>
-                                        <select id="sltType" class="form-select select-sm" onchange="onSltType()">
+                
+                <div id="main" class="container">
+                    <div class="row">
+                        <div id="content" class="col-8">
+                            <div class="col-8">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="sltt">Select a Maze</label>
+                                        <select id="sltType" class="form-control" data-role = "select-dropdown" data-profile="minimal" onchange="onSltType()">
                                             <option>Maze1</option>
                                             <option>Maze2</option>
                                         </select>
-                                        <span class="input-group-addon addon-sm">Algorithm:</span>
-                                        <select id="algType" class="form-select select-sm">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="slta">Select an Algorithm</label>
+                                        <select id="algType" class="form-control" data-role="select-dropdown" data-profile="minimal">
                                             <option>Absolute distance priorty</option>
                                             <option>A* Algorithm</option>
                                         </select>
-                                        <div></div> 
-                                        <label class="form-checkbox input-sm">
-                                            <input id="chkAnimated" type="checkbox" class="input-sm" name="maze" checked><i class="form-icon"></i>Animated
-                                        </label>
-                                        <span class="input-group-addon addon-sm">Columns:</span>
-                                        <input id="cols" class="form-input input-sm" type="number" placeholder="90" value="90">
-                                        <span class="input-group-addon addon-sm">Rows:</span>
-                                        <input id="rows" class="form-input input-sm" type="number" placeholder="60" value="60">
-                                        <span class="input-group-addon addon-sm">Density:</span>
-                                        <input id="density" class="form-input input-sm" type="number" placeholder="60" value="60" disabled>
-                                        <button id="btnCreateMaze" class="btn btn-sm input-group-btn" onclick="onCreate()">Create</button>
-                                        <button id="btnClear" class="btn btn-sm input-group-btn" onclick="onClear()">Clear</button>
-                                    </div> 
+                                    </div>
                                 </div>
-                                <div id="maze1" class="column col-6"></div>
-                                <div id="maze2" class="column col-6"></div>
-                                <div id="footer1" class="column col-6">Violence Algorithm</div>
-                                <div id="fotter2" class="column col-18">Optimized Algorithm</div>        
+                                <br/>
+                                <div id="maze1" class="col-sm-4"></div>
+                                <div id="maze2" class="col-sm-4"></div>     
                             </div>
                         </div>
                     </div>
@@ -75,3 +96,10 @@
         </div>
     </body>
 </html>
+
+<style>
+	#test{
+		color: white;
+		text-decoration: none;
+	}
+</style>

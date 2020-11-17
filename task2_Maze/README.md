@@ -20,6 +20,8 @@ https://github.com/zilinglius/maze.git
     + add function of selecting algorithm
     + optimize some details
     + add shortcut icon & title
++ UI:
+  + re-organize UI
 + Algorithm: 
     + add A* Algorithm for Maze1 (Quad)
     + add A* Algorithm for Maze2 (Oct)
