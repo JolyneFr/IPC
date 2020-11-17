@@ -340,7 +340,6 @@ function solveMaze2_AStar(index) {
     openList.push({x:start[index].x, y:start[index].y, G:0});
     drawMaze(index);
 
-    
     recur_AStar_Maze2(index, openList, closeList);
     
 }
