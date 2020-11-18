@@ -34,6 +34,13 @@ function drawBlock(ctx, sx, sy, a) {
     ctx.fillRect( grid * sx, grid * sy, grid, grid  );
 }
 
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
 function getNextStepForMaze1( index, sx, sy, a ) {
     var n = [];
 
@@ -43,9 +50,9 @@ function getNextStepForMaze1( index, sx, sy, a ) {
         if(sx + step.dx > 0 && sx + step.dx < cols - 1 && sy + step.dy > 0 && sy + step.dy < rows - 1 &&
             mazes[index][sx + step.dx][sy + step.dy] % 8 == a){
             n.push({x: sx + step.dx, y: sy + step.dy});
-            break;
         }
     }
+    //shuffleArray(n);
     return n;
 }
 
@@ -91,6 +98,8 @@ function getOptimizedNextStepForMaze1(index, sx, sy, a) {
         n.push({x: sx + quadSteps[pos].dx, y: sy + quadSteps[pos].dy});
     }
 
+    shuffleArray(n);
+
     return n; 
 }
 
@@ -103,10 +112,9 @@ function getNextStepForMaze2( index, sx, sy, a ) {
         if(sx + step.dx >= 0 && sx + step.dx <= cols - 1 && sy + step.dy >= 0 && sy + step.dy <= rows - 1 &&
             mazes[index][sx + step.dx][sy + step.dy] % 8 == a){
             n.push({x: sx + step.dx, y: sy + step.dy});
-
-            break;
         }
     }
+    shuffleArray(n);
     return n;
 }
 
@@ -152,6 +160,8 @@ function getOptimizedNextStepForMaze2(index, sx, sy, a) {
     if (pos > -1) {
         n.push({x: sx + octSteps[pos].dx, y: sy + octSteps[pos].dy});
     }
+
+    shuffleArray(n);
 
     return n; 
 }
